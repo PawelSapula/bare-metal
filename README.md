@@ -1,12 +1,13 @@
-# My low level workspace
+# Guide on my low-level workspace
+Important tools and setups to be able to reproduce my low-level programming setup on any MacOS machine.
 
 # Files:
- - syscalls.txt - Syscalls for ARM64 XNU.
+ - `syscalls.txt` - Syscalls for ARM64 XNU.
 
 # Setup
- - LLVM - Compiler infrastructure providing toolchains and framework. Similar to the OG GCC, and often a modern alternative.
-    - Clang: A compilator frontend for C, C++ & Objective- versions. Works also with assembly.
-    - LLDB - Default debugger for MacOS and IOS systems.
+ - `LLVM` - Compiler infrastructure providing toolchains and framework. Similar to the OG GCC, and often a modern alternative.
+    - `Clang` - A compilator frontend for C, C++ & Objective- versions. Works also with assembly.
+    - `LLDB` - Default debugger for MacOS and IOS systems.
 
 Initial tools: `xcode-select --install`
 
@@ -14,13 +15,14 @@ Initial tools: `xcode-select --install`
  Compile: clang `<source-file.*>` -o `<output-exec>` <br>
  Compile down to asm: clang -S `<source-file.*>` -O`<level>`
 
- <br><br>
+ <br>
 
  Debugger LLDB:
   - Start a session: `lldb (can specify target here)`
   - Initialize a target: `$ target create <executable>`
   - Breakpoints `$ b <func-name>`
   - GUI view: `$ gui`
+  - Commands: Continue/Next/Step/Print -> `c/n/s/p`
 
 <br>
 
@@ -28,23 +30,23 @@ Initial tools: `xcode-select --install`
 This section will cover installation of Voltron, a standalone and my personal installation.
 Standalone, Voltron isn't the most effective tool. Follow "Full installation" for full setup.
 
-- Standalone installation:
+### Standalone installation:
   - Install voltron via. installation script.
   - Repo: `https://github.com/snare/voltron`
   - Pip: `python3 -m pip install voltron`
   - Implement installation entry point to `.lldbinit` if not done automatically:
     -  `command script import /path/to/voltron/entry.py`
 
-Start LLDB session, if `Voltron loaded.` not present, try voltron init. <br>
+Start LLDB session, if `Voltron loaded.` not present, try `$ voltron init`. <br>
 New terminal -> Start voltron instance: `(python3 -m) voltron view <mode>` <br>
 
-- Full installation:
-    - Install voltron via. installation script.
-    - Repo: `https://github.com/snare/voltron`
-    - Create a python virtual environment in workspace: `python3 -m venv .venv`
-    - Use following command for installation `./install.sh -v /path/to/venv -b lldb` (Encourage to do this from home dir!)
-    - Create a local `.lldbinit` file and move contents written from home dir's `.llbdinit`.
-    - Allow initialization from working directories: `settings set target.load-cwd-lldbinit true`
+### Full installation:
+  - Install voltron via. installation script.
+  - Repo: `https://github.com/snare/voltron`
+  - Create a python virtual environment in workspace: `python3 -m venv .venv`
+  - Use following command for installation `./install.sh -v /path/to/venv -b lldb` (Encourage to do this from home dir!)
+  - Create a local `.lldbinit` file and move contents written from home dir's `.llbdinit`.
+  - Allow initialization from working directories: `settings set target.load-cwd-lldbinit true`
 
 
 # Optional: Tmux - A terminal multiplexer
@@ -78,12 +80,12 @@ Panes:
 
  - Good to know: 
     - Create project: `tmuxinator new <name>`
-        - $EDITOR might not be set, edit in `.bashrc/zshrc`
+        - `$EDITOR` might not be set, edit in `.bashrc/zshrc`
     - Create local project: `tmux new --local <name>` (For actual repo)
     - Tmux setup to config: `tmux list-windows`
 
 <br>
 
- - Voltron creator setup which i also use is provided in the repo.
- - Important! Change your root directory path in the `.tmuxinator.yml` file.
- - Start it with `tmuxinator start voltron` 
+Voltron creator setup which i also use is provided in the repo. <br>
+Important! Change your root directory path in the `.tmuxinator.yml` file. <br>
+Start it with `tmuxinator start voltron`. <br>
