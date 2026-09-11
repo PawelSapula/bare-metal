@@ -1,0 +1,89 @@
+# My low level workspace
+
+# Files:
+ - syscalls.txt - Syscalls for ARM64 XNU.
+
+# Setup
+ - LLVM - Compiler infrastructure providing toolchains and framework. Similar to the OG GCC, and often a modern alternative.
+    - Clang: A compilator frontend for C, C++ & Objective- versions. Works also with assembly.
+    - LLDB - Default debugger for MacOS and IOS systems.
+
+Initial tools: `xcode-select --install`
+
+# Guide to compiling & debugging
+ Compile: clang `<source-file.*>` -o `<output-exec>` <br>
+ Compile down to asm: clang -S `<source-file.*>` -O`<level>`
+
+ <br><br>
+
+ Debugger LLDB:
+  - Start a session: `lldb (can specify target here)`
+  - Initialize a target: `$ target create <executable>`
+  - Breakpoints `$ b <func-name>`
+  - GUI view: `$ gui`
+
+<br>
+
+# Optional: Voltron Python TUI debugger for productivity
+This section will cover installation of Voltron, a standalone and my personal installation.
+Standalone, Voltron isn't the most effective tool. Follow "Full installation" for full setup.
+
+- Standalone installation:
+  - Install voltron via. installation script.
+  - Repo: `https://github.com/snare/voltron`
+  - Pip: `python3 -m pip install voltron`
+  - Implement installation entry point to `.lldbinit` if not done automatically:
+    -  `command script import /path/to/voltron/entry.py`
+
+Start LLDB session, if `Voltron loaded.` not present, try voltron init. <br>
+New terminal -> Start voltron instance: `(python3 -m) voltron view <mode>` <br>
+
+- Full installation:
+    - Install voltron via. installation script.
+    - Repo: `https://github.com/snare/voltron`
+    - Create a python virtual environment in workspace: `python3 -m venv .venv`
+    - Use following command for installation `./install.sh -v /path/to/venv -b lldb` (Encourage to do this from home dir!)
+    - Create a local `.lldbinit` file and move contents written from home dir's `.llbdinit`.
+    - Allow initialization from working directories: `settings set target.load-cwd-lldbinit true`
+
+
+# Optional: Tmux - A terminal multiplexer
+- Allows for different operations for your terminal.
+- Installed via. Brew <br>
+
+Command basics:
+ - `tmux` - Start an unnamed session
+ - `tmux new -s <name>` - Start a named session
+ - `tmux ls`- List sessions
+ - `tmux a -t <session>` - Attach to a session 
+ - `tmux kill-session -t <session`> - Kill a session
+
+Session control:
+ - Leader key: `Ctrl+b` (default)
+ - Detach from session: `leader + d`
+
+TMUX Provides basic functionalities for panes and windows. Focusing on panes here. <br>
+
+Panes:
+ - Split vertical: `leader + %`
+ - Split horizontal: `leader + "`
+ - Move between panes: `leader + arrow keys`
+ - Zoom in/out pane: `leader + z`
+ - Close pane: `leader + x`
+
+### Utility: Tmuxinator - Scripting tool for Tmux.
+ - Installed via Brew.
+
+<br>
+
+ - Good to know: 
+    - Create project: `tmuxinator new <name>`
+        - $EDITOR might not be set, edit in `.bashrc/zshrc`
+    - Create local project: `tmux new --local <name>` (For actual repo)
+    - Tmux setup to config: `tmux list-windows`
+
+<br>
+
+ - Voltron creator setup which i also use is provided in the repo.
+ - Important! Change your root directory path in the `.tmuxinator.yml` file.
+ - Start it with `tmuxinator start voltron` 
