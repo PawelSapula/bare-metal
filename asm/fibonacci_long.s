@@ -3,6 +3,9 @@ msg: .asciz ""
 separator: .space 16
 hex_msg: .ascii "Hex value: "
 endline: .ascii "\n"
+separator2: .space 20
+decimal_value: .asciz ""
+.separato3: .space 64 // Estimate so nothing potentially takes this memory
 
 .text
 .global _main
@@ -30,6 +33,8 @@ Register lifetimes and use:
         w8 - Fibonnaci byte
         w9 - Fibonacci half byte
         w10 - Hex-Ascii conversion value
+    Deciam lconverter:
+      - w13 - Loaded first byte
 
 
   End:
@@ -77,6 +82,18 @@ bfi w10, w21, #8, #8 // Second byte
 ret
 
 hex_to_decimal:
+ mov x14, #0
+ ubfx x13, x0, #0, #64
+ 
+ ubfx x15, x13, #60, #4 // Get hex
+
+ mov x16, #16
+ mul_loop:
+ cmp x14, #15
+ mul x15, x15, x16
+ add x14, x14, #1
+ blo mul_loop 
+
 ret
 
 hex_to_ascii:
@@ -127,10 +144,13 @@ _main:
   adrp x7, msg@page // Obtain msg location
   add x7, x7, msg@pageoff
   add x7, x7, #15 // 16 bytes to be stored since one hex translates to two values (hex + 0x30 || 0x37)
+
   mov x6, #0 // Loop counter
   loop:
   cmp x6, #7 // (0-7) = 8 bytes in a 64-bit register
   bls convert_to_ascii
+
+  bl hex_to_decimal
  
 
 mov x16, #0x4 //write() syscall
