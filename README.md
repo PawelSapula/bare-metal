@@ -1,8 +1,25 @@
 # Guide on my low-level workspace
 Important tools and setups to be able to reproduce my low-level programming setup on any MacOS machine.
 
+# Projects in this repo 
+**asm/128-bit-register**
+    - Attempt on making a uint128_t. Utilizing two 64-bit registers to perform hexidecimal to decimal conversion using division of whole numbers.
+
 # Files:
- - `syscalls.txt` - Syscalls for ARM64 XNU.
+`.
+├── asm
+│   ├── 128-bit-register.s
+│   ├── ARMv7-M Architecture Reference Manual.pdf               - V7 (Microcontrollers etc.)
+│   ├── ARMv8 for ARMv8-A Architecture Reference Manual.pdf     - V8 (Normal processors etc.)
+│   ├── asm_guide.md                                            - Notes for learning Aarch64 
+│   ├── asm.s               - Random code
+│   ├── c_to_asm.c          - Tests with deassembler
+│   ├── c_to_asm.s          
+│   ├── fibonacci_long.s    - Fibonacci project
+│   ├── syscalls.txt                                            - Aarch64 XNU (MacOS Syscalls)
+├── c
+│   └── dynamic_array.c                                         - Test of a dynamic array (heap testing)
+`
 
 # Setup
  - `LLVM` - Compiler infrastructure providing toolchains and framework. Similar to the OG GCC, and often a modern alternative.

@@ -1,3 +1,4 @@
+#include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,9 +10,9 @@ Asm: clang -S exec -O<level> -o output
  */
 
 typedef struct {
-int *ptr;
-int length;
-int size;
+  int *ptr;
+  int length;
+  int size;
 } Array;
 
 Array initArray() {
@@ -22,40 +23,47 @@ Array initArray() {
   return array;
 }
 
-void addToArray(Array* array, int value){
-  if(array->length > array->size) {
+void addToArray(Array *array, int value) {
+  if (array->length > array->size) {
     array->size += 10;
     array->ptr = realloc(array->ptr, array->size * sizeof(int));
-    if(array->ptr != 0) { // Cleanup moved buffer
-      memset(array->ptr+(array->size-9), 0, 10*sizeof(int)); // 9 Because our pointer can be seen as 1. Following standard c logic, we think of it as location 0.
+    if (array->ptr != 0) { // Cleanup moved buffer
+      memset(
+          array->ptr + (array->size - 9), 0,
+          10 *
+              sizeof(int)); // 9 Because our pointer can be seen as 1. Following
+                            // standard c logic, we think of it as location 0.
     }
   }
 
   array->ptr[array->length] = value;
   array->length++;
-  
 }
 
-void getValueAt(Array* array, int placement) {
+void getValueAt(Array *array, int placement) {
   int val = array->ptr[placement];
-  printf("Addr: %d, Offset: %d (%d), Value: %d\n", array->ptr, placement*sizeof(int), placement, val);
+  printf("Addr: %d, Offset: %d (%d), Value: %d\n", array->ptr,
+         placement * sizeof(int), placement, val);
 }
 
-void getArrayValues(Array* array){
-  for(int i = 0; i<=array->size; i++) {
+void getArrayValues(Array *array) {
+  for (int i = 0; i <= array->size; i++) {
     getValueAt(array, i);
   }
 }
 
-void freeArray(Array* array) {
-free(array->ptr);
-array->ptr = NULL;
+void freeArray(Array *array) {
+  free(array->ptr);
+  array->ptr = NULL;
 }
 
 int main() {
   Array a = initArray();
-  for(int i = 0; i <= 10; i++){
-  addToArray(&a, i);
+  for (int i = 0; i <= 10; i++) {
+
+    pthread_t thread;
+    pthread_create(&thread, NULL, addToArray, &a, i); // Make struct
+    pthread_join(thread, NULL);
   }
   getArrayValues(&a);
   addToArray(&a, 11);
