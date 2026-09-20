@@ -5,6 +5,8 @@ Important tools and setups to be able to reproduce my low-level programming setu
 **asm/128-bit-register**
     - Attempt on making a uint128_t. Utilizing two 64-bit registers to perform hexidecimal to decimal conversion using division of whole numbers. <br> <br>
     Showcase: <br>
+    - Note: Aarch64 XNU MacOS system calls. Therefore MacOS exclusive.
+    - Things to improve: Code structure for clarity, let the user convert an arbitrary amount of hexes (Program malfunctions when < 32)
     <img width="520" height="58" alt="image" src="https://github.com/user-attachments/assets/2e4114cf-9905-40d7-872f-b1bae0598464" />
 
 
