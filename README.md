@@ -3,10 +3,14 @@ Important tools and setups to be able to reproduce my low-level programming setu
 
 # Projects in this repo 
 **asm/128-bit-register**
-    - Attempt on making a uint128_t. Utilizing two 64-bit registers to perform hexidecimal to decimal conversion using division of whole numbers.
+    - Attempt on making a uint128_t. Utilizing two 64-bit registers to perform hexidecimal to decimal conversion using division of whole numbers. <br> <br>
+    Showcase: <br>
+    <img width="520" height="58" alt="image" src="https://github.com/user-attachments/assets/2e4114cf-9905-40d7-872f-b1bae0598464" />
+
+
 
 # Files:
-`.
+```
 ├── asm
 │   ├── 128-bit-register.s
 │   ├── ARMv7-M Architecture Reference Manual.pdf               - V7 (Microcontrollers etc.)
@@ -18,8 +22,9 @@ Important tools and setups to be able to reproduce my low-level programming setu
 │   ├── fibonacci_long.s    - Fibonacci project
 │   ├── syscalls.txt                                            - Aarch64 XNU (MacOS Syscalls)
 ├── c
-│   └── dynamic_array.c                                         - Test of a dynamic array (heap testing)
-`
+│   ├── dynamic_array.c                                         - Test of a dynamic array (heap testing)
+|   └── vulkan                                                  - Vulkan project
+```
 
 # Setup
  - `LLVM` - Compiler infrastructure providing toolchains and framework. Similar to the OG GCC, and often a modern alternative.
