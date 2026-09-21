@@ -14,12 +14,18 @@ set(CMAKE_CXX_STANDARD 17)
 
 # Early Apple Silicon (Supposedly M1-M3)
 list(APPEND CMAKE_PREFIX_PATH "/opt/homebrew/")
+include_directories(include)
 
 find_package(Vulkan REQUIRED)
 find_package(glfw3 CONFIG REQUIRED)
 
 add_executable(${PROJECT_NAME} main.c
-                              modules/vulkan_init.c)
+                              modules/vk_setup.c
+                              modules/vk_utils.c
+                              include/vk_setup.h
+                              include/vk_utils.h
+                              include/utils.h
+                            )
 
 target_link_libraries(${PROJECT_NAME} glfw ${GLFW_LIBRARIES} Vulkan::Vulkan)
 

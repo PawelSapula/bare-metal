@@ -1,25 +1,24 @@
+#include <stdio.h>
 #define GLFW_INCLUDE_VULKAN
-#include "modules/vulkan_init.h"
-#include <GLFW/glfw3.h>
+#include "vk_setup.h"
 
-#define GLFW_FORCE_RADIANS
-#define GLFW_FORCE_DEPTH_ZERO_TO_ONE
+// Pawel Sapula
+// Started 19.09.2026
+// Following https://vulkan-tutorial.com for a good starting point (Amazing tutorial btw.)
 
-int main() {
+static void run();
+
+int main() { run(); }
+
+static void run() {
+  if(vk_initialize() != SUCCESS) { goto exit; }
+  if(vk_pick_physical_device() != SUCCESS) {goto exit;}
+  if(vk_create_logical_device() != SUCCESS) {goto exit;}
+
   glfwInit();
-
-  GLFWwindow* window = create_glfw_window("GLFW window");
-
-   uint32_t extensionCount = 0;
-  vkEnumerateInstanceExtensionProperties(NULL, &extensionCount, NULL);
-
-  printf("%d\n extensions supported", extensionCount);
-
-  while (!glfwWindowShouldClose(window)) {
-    glfwPollEvents();
-  }
-  
-  glfwDestroyWindow(window);
-  glfwTerminate();
-  return 0;
+  if(create_glfw_window("GLFW Window") != SUCCESS) {goto exit;}
+  vk_loop();
+exit:
+  vk_cleanup();
 }
+
