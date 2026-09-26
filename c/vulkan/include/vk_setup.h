@@ -21,8 +21,17 @@
 
 
 int vk_initialize();
+int vk_create_surface();
 int vk_pick_physical_device();
 int vk_create_logical_device();
+int vk_create_swapchain();
+int vk_create_image_views();
+int vk_create_render_pass();
+int vk_create_graphics_pipeline();
+int vk_create_framebuffers();
+int vk_create_command_pool();
+int vk_create_command_buffer();
+int vk_create_sync_objects();
 void vk_loop();
 int vk_cleanup();
 int create_glfw_window(const char* window_title);

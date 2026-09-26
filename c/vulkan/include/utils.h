@@ -9,6 +9,7 @@
 #endif
 
 #define GET_ARRAY(type, count) malloc(sizeof(type)*count)
+#define CLAMP(curr, min, max) (curr > min && curr < max) ? curr : (curr < min) ? min : (curr > max) ? max : curr
 
 #define OPTIONAL_REGISTER(T) typedef struct {T value; uint8_t is_changed;} T ## _opt; // Inspiration https://github.com/m-kru/c-option/tree/master
 #define OPTIONAL_MODIFY(ref) ref.is_changed = 1; ref.value  // Use = to assign

@@ -22,8 +22,13 @@ find_package(glfw3 CONFIG REQUIRED)
 add_executable(${PROJECT_NAME} main.c
                               modules/vk_setup.c
                               modules/vk_utils.c
+                              modules/vk_swapchain_utils.c
+                              modules/vk_shader_utils.c
                               include/vk_setup.h
+                              include/vk_data.h
                               include/vk_utils.h
+                              include/vk_swapchain_utils.h
+                              include/vk_shader_utils.h
                               include/utils.h
                             )
 
