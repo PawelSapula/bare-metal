@@ -1,14 +1,44 @@
-# Guide on my low-level workspace
-Important tools and setups to be able to reproduce my low-level programming setup on any MacOS machine.
+# Bare Metal - Low level Workspace
+Welcome to my low-level workspace! Below is a little introduction about my projects and preferred setups.
 
 # Projects in this repo 
-**asm/128-bit-register**
+
+## 💡 blinky_h755
+**Have you ever wondered how much you can optimize the typical embedded "Hello World" project?**<br> <br>
+I rewrote blinky in **Aarch64 Thumb instruction set** specialised for efficiency and low power consumption, perfectly suited for microcontrollers. <br>
+This project is based on the manuals for **STM32 H755x** and other variants of the microcontrollers in the same family, having an **Arm Cortex-M7 CPU**. <br>
+This MCU comes with many in-built peripherals including three user diodes which I used to complete Blinky without any external wiring over a specific GPIO port. <br>
+
+<br>
+Despite reducing the size of the Blinky from typical C code or using a fully fledged RTOS, there were many things that incremented the program size, due to the advanced structure and components of the board. <br>
+This icncludes for example enabling different peripheral clocks and managing an entry point for the processor's boot process. <br> <br>
+
+### This experiment ended up with an impressive.... **192 bytes**! <br>
+<img width="656" height="395" alt="image" src="https://github.com/user-attachments/assets/5c2981ca-5a89-4c74-bbef-ba0f9f7087bc" />
+
+<br><br>
+..... I must admit I'm lying a little here, this is due to two data variables existing on the memory instead of the flash. <br>
+It is fully possible to change this, where we tell the linker to initially store our ram memory on the flash, and then manually load it on the stack. <br>
+I was too excited and decided that the experiment could end here before 10 more hours of potential debugging and documentation reading if something went wrong. <br>
+Both variables are of word type, so we can additionally add 8 bytes to the final sum. <br>
+Copying the memory over to the stack would also consume some bytes itself, giving my final estimate of **~220 bytes**.
+
+<br><br>
+
+**Note for the interested:**
+- An arm-wabi compiler is needed to compile the code.
+- Can flash using STM32CubeProgrammer (first thing I came up with)
+- Use the .elf file to flash it if you want to try out a compiled version. (Includes linker info that STM32Cube handles)
+- Compiled binary doesn't work (comment in section over) and is only for showcase.
+
+<br><br>
+
+## 💻 asm/128-bit-register
 - Attempt on making a uint128_t. Utilizing two 64-bit registers to perform hexidecimal to decimal conversion using division of whole numbers. 
 - Note: Aarch64 XNU MacOS system calls. Therefore MacOS exclusive.
 - Things to improve: Code structure for clarity, let the user convert an arbitrary amount of hexes (Program malfunctions when < 32)<br> <br>
     Showcase: <br>
     <img width="520" height="58" alt="image" src="https://github.com/user-attachments/assets/2e4114cf-9905-40d7-872f-b1bae0598464" />
-
 
 
 # Files:
@@ -19,6 +49,7 @@ Important tools and setups to be able to reproduce my low-level programming setu
 │   ├── ARMv8 for ARMv8-A Architecture Reference Manual.pdf     - V8 (Normal processors etc.)
 │   ├── asm_guide.md                                            - Notes for learning Aarch64 
 │   ├── asm.s               - Random code
+|   ├── blinky_h755/                                            Subproject: Blinky in assembly
 │   ├── c_to_asm.c          - Tests with deassembler
 │   ├── c_to_asm.s          
 │   ├── fibonacci_long.s    - Fibonacci project
