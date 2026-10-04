@@ -44,19 +44,17 @@ Copying the memory over to the stack would also consume some bytes itself, givin
 # Files:
 ```
 ├── asm
-│   ├── 128-bit-register.s
-│   ├── ARMv7-M Architecture Reference Manual.pdf               - V7 (Microcontrollers etc.)
-│   ├── ARMv8 for ARMv8-A Architecture Reference Manual.pdf     - V8 (Normal processors etc.)
+│   ├── 128-bit-register.s                                      - Subproj. 128-bit register
 │   ├── asm_guide.md                                            - Notes for learning Aarch64 
-│   ├── asm.s               - Random code
+│   ├── asm.s               - Test code
 |   ├── blinky_h755/                                            Subproject: Blinky in assembly
 │   ├── c_to_asm.c          - Tests with deassembler
 │   ├── c_to_asm.s          
 │   ├── fibonacci_long.s    - Fibonacci project
 │   ├── syscalls.txt                                            - Aarch64 XNU (MacOS Syscalls)
 ├── c
-│   ├── dynamic_array.c                                         - Test of a dynamic array (heap testing)
-|   └── vulkan                                                  - Vulkan project
+|   └── vulkan                                                  - Subproj: Electrical circuit simulator
+       └── mystd                                       - Subproj: Code collection of useful programming concepts remade in C.
 ```
 
 # Setup
