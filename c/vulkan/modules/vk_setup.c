@@ -410,6 +410,7 @@ int vk_create_graphics_pipeline(){
  input_assembly_info.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
  input_assembly_info.primitiveRestartEnable = VK_FALSE; // Enables to break up lines and traingles in the _STRIP topology mode(s).
 
+ /*
  VkViewport viewport = {}; // Define the transformation from the image to the framebuffer.
  viewport.x = 0.0f;
  viewport.y = 0.0f;
@@ -421,6 +422,7 @@ int vk_create_graphics_pipeline(){
  VkRect2D scissor = {}; // Define where pixels will actually be stored (outside are disregarded by the rasterizer)
  scissor.offset = (VkOffset2D){0,0};
  scissor.extent = swapchain.extent;
+ */
 
  // Specify this as a dynamic state of a pipeline for modularity.
  // Very common and gives flexibility, where all implementations can handle this without a performance penalty.
@@ -593,7 +595,7 @@ int vk_create_command_buffer() {
 
 static VkSemaphore image_available_sp;
 static VkSemaphore render_finished_sp;
-VkFence in_flight_fence;
+static VkFence in_flight_fence;
 
 int vk_create_sync_objects(){
   VkSemaphoreCreateInfo semaphore_info = {};

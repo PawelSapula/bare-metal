@@ -11,6 +11,10 @@
     10) Draw frames by aquiring images, submitting the right draw command buffer and returning the images back to the swap chain
 
 # Vulkan SDK
+
+    Cool reference i found: "Understanding Vulkan objects - AMD GPUOpen"
+        https://gpuopen.com/learn/understanding-vulkan-objects/
+
     - Function prefix: `vk`
     - Structs and enums prefix: `Vk´
     - Enumeration values: `VK_`

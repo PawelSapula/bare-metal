@@ -1,6 +1,8 @@
+#include <assert.h>
 #include <stdio.h>
 #define GLFW_INCLUDE_VULKAN
 #include "vk_setup.h"
+#include "mystd/mystd.h"
 
 // Pawel Sapula
 // Started 19.09.2026
@@ -11,7 +13,11 @@ static void run();
 
 int main() { run(); }
 
+
 static void run() {
+
+  mystd_tests();
+  return;
 
   if(!glfwInit()){
     printf("Failed to init GLFW!");
