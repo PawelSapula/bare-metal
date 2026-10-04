@@ -30,7 +30,13 @@ add_executable(${PROJECT_NAME} main.c
                               include/vk_swapchain_utils.h
                               include/vk_shader_utils.h
                               include/utils.h
+
+                              mystd/mystd.h
+                              mystd/mystd_conf.h
+                              mystd/dyn_arr.c
+                              mystd/dyn_arr.h
                             )
+
 
 target_link_libraries(${PROJECT_NAME} glfw ${GLFW_LIBRARIES} Vulkan::Vulkan)
 
