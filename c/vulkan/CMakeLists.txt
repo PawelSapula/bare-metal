@@ -20,11 +20,26 @@ find_package(Vulkan REQUIRED)
 find_package(glfw3 CONFIG REQUIRED)
 
 add_executable(${PROJECT_NAME} main.c
-                              modules/vk_setup.c
+
+
+                              modules/buffers.c
+                              modules/devices.c
+                              modules/pipeline.c
+                              modules/swapchain.c
+                              modules/draw.c
+                              modules/vk_instance.c
+
+                              include/buffers.h
+                              include/devices.h
+                              include/pipeline.h
+                              include/swapchain.h
+                              include/draw.h
+                              include/vk_instance.h
+
                               modules/vk_utils.c
                               modules/vk_swapchain_utils.c
                               modules/vk_shader_utils.c
-                              include/vk_setup.h
+
                               include/vk_data.h
                               include/vk_utils.h
                               include/vk_swapchain_utils.h

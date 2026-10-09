@@ -2,11 +2,6 @@
 #define UTILS_H_
 #include <stdlib.h>
 
-#ifdef NDEBUG
-#define VALIDATION_LAYERS 0
-#else
-#define VALIDATIONS_LAYERS 1
-#endif
 
 #define GET_ARRAY(type, count) malloc(sizeof(type)*count)
 #define CLAMP(curr, min, max) (curr > min && curr < max) ? curr : (curr < min) ? min : (curr > max) ? max : curr
