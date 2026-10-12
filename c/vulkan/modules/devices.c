@@ -1,9 +1,9 @@
 #include <stdint.h>
 #include <stdio.h>
 
+#include "instance.h"
 #include "utils.h"
 #include "vk_utils.h"
-#include "vk_instance.h"
 #include <devices.h>
 
 static int impl_pick_physical_device();

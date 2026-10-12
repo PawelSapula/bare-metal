@@ -1,5 +1,9 @@
-#include "vk_instance.h"
+#include "instance.h"
 #include "vk_utils.h"
+#include <dcimgui.h>
+#include <dcimgui_impl_glfw.h>
+#include <dcimgui_impl_vulkan.h>
+#include <vulkan/vulkan_core.h>
 
 static int impl_create_glfw_window(const char* name);
 static int impl_initialize();
@@ -91,13 +95,21 @@ static int impl_initialize() {
   return SUCCESS;
 }
 
+
+static int test = 0;
 void impl_program_loop() {
+  if(!test) {
+    api.gui_api.init_gui(); 
+    test = 1;
+  }
 
   while (!glfwWindowShouldClose(vk_inst.instance.window)) {
-    glfwPollEvents();
+    glfwPollEvents(); 
+    api.gui_api.build_frame();
     api.draw_api.draw_frame();
   }
   vkDeviceWaitIdle(vk_inst.devices.device);
+  api.gui_api.shoutdown_gui(); 
 }
 
 int impl_cleanup() {

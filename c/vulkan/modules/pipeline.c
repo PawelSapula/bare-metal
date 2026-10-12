@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 #include "pipeline.h"
-#include <vk_instance.h>
+#include "instance.h"
 #include <vk_shader_utils.h>
 
 

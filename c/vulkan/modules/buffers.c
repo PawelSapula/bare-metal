@@ -1,6 +1,6 @@
 #include "buffers.h"
-#include "vk_instance.h"
 #include <vk_utils.h>
+#include "instance.h"
 
 static int impl_create_framebuffers();
 static int impl_create_command_buffer();

@@ -18,40 +18,32 @@ include_directories(include)
 
 find_package(Vulkan REQUIRED)
 find_package(glfw3 CONFIG REQUIRED)
+add_library(ImGui STATIC IMPORTED) # External library
 
-add_executable(${PROJECT_NAME} main.c
+set_target_properties(ImGui PROPERTIES # Specify location & Dependent files
+  IMPORTED_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/lib/libImGui.a"
+  INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/lib"
+)
 
 
-                              modules/buffers.c
-                              modules/devices.c
-                              modules/pipeline.c
-                              modules/swapchain.c
-                              modules/draw.c
-                              modules/vk_instance.c
+file(GLOB_RECURSE MODULES CONFIGURE_DEPENDS modules/*.c) #CONFIGURE_DEPENDS - Rebuilts project when new files
+file(GLOB_RECURSE INCLUDES CONFIGURE_DEPENDS include/*.h)
+file(GLOB_RECURSE LIB lib/*.h)
+file(GLOB_RECURSE MYSTD_LIB mystd/*.h)
 
-                              include/buffers.h
-                              include/devices.h
-                              include/pipeline.h
-                              include/swapchain.h
-                              include/draw.h
-                              include/vk_instance.h
-
-                              modules/vk_utils.c
-                              modules/vk_swapchain_utils.c
-                              modules/vk_shader_utils.c
-
-                              include/vk_data.h
-                              include/vk_utils.h
-                              include/vk_swapchain_utils.h
-                              include/vk_shader_utils.h
-                              include/utils.h
-
-                              mystd/mystd.h
-                              mystd/mystd_conf.h
-                              mystd/dyn_arr.c
-                              mystd/dyn_arr.h
-                            )
+add_executable(${PROJECT_NAME} 
+  main.c
+  ${MODULES}
+  ${INCLUDES}
+  ${LIB}
+  ${MYSTD_LIB}
+)
 
 
 target_link_libraries(${PROJECT_NAME} glfw ${GLFW_LIBRARIES} Vulkan::Vulkan)
+target_link_libraries(${PROJECT_NAME} ImGui
+)
 
+set_property(TARGET ${PROJECT_NAME} # Use Cpp linker due to imgui
+  PROPERTY LINKER_LANGUAGE CXX
+)
